@@ -13,13 +13,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: "film"
+      redirect: "film/nowplaying"
     },
     {
       path: '/film',
-      name: 'film',
       component: film,
       children: [
+        {path: "/", redirect: "nowplaying"},
         {path: "nowplaying", name: "nowplaying",component: nowplaying},
         {path: "commingsoon", name: "commingsoon",component: commingsoon},
       ]

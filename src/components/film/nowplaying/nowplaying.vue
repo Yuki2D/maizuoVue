@@ -58,11 +58,11 @@ export default {
             var screenH = document.documentElement.clientHeight;          //屏幕尺寸高度
             var overflowH = document.documentElement.scrollTop;           //可滚动容器超出屏幕尺寸高度
             if(bigH < screenH+overflowH+50 && this.isCanScroll){         //到底了
-                if(this.data.length<this.total){
-                    this.isCanScroll = false;
+                if(this.data.length<this.total){                         //data的数组长度<总条数则继续获取数据
+                    this.isCanScroll = false;    
                     this.$http.get("/nowPlaying"+(this.num++)).then((res)=>{
                         this.data =  this.data.concat(res.data.data.films)
-                        this.total = res.data.data.total;
+                        this.total = res.data.data.total;   //总条数
                         this.isCanScroll = true;
                     })
                 }else{
@@ -70,6 +70,11 @@ export default {
                 }
             }
         }
+        /**
+         * 如果bigH<screenH+overflowH   说明到底部了
+         * this.isCanScroll     定义是否可以滚动(到底部之后,将该数据设置为false,则到底部也不会获取数据,避免了429(过多请求))
+         * this.data.length<this.total  获取到数据里面的total总条数,判断data里面的数组长度是否<总条数,是则继续获取下一页, 否则不再获取
+        */
     },
 }
 </script>

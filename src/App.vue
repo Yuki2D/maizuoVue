@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <posi></posi>
     <router-view/>
     <tabbar></tabbar>
   </div>
@@ -7,9 +8,10 @@
 
 <script>
 import tabbar from "@/components/common/tabbar/tabbar.vue"
+import posi from "@/components/common/position/position"
 export default {
   name: 'App',
-  components: {tabbar}
+  components: {tabbar,posi}
 }
 </script>
 

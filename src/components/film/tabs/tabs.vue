@@ -15,8 +15,8 @@ export default {
     data(){
         return {
             list: [
-                {path: "/film/nowplaying", name: "正在热映"},
-                {path: "/film/commingsoon", name: "即将上映"}
+                {path: "nowplaying", name: "正在热映"},
+                {path: "commingsoon", name: "即将上映"}
             ],
             nowItem: '正在热映'
         }
@@ -30,11 +30,13 @@ export default {
                 this.$refs.tabs.style.position = "static";
             }
         })
+        this.nowItem = window.sessionStorage.getItem("nowItem") //获取会话缓存的数据
     },
     methods: {
         showView: function(item){
             this.nowItem = item.name
             this.$router.push({path: item.path})
+            window.sessionStorage.setItem("nowItem",this.nowItem);   //将nowItem设置到会话缓存
         }
     },
 }
